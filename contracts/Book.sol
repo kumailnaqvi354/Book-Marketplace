@@ -70,7 +70,9 @@ contract Book is ERC721, ReentrancyGuard {
             buyerAddress : msg.sender,
             buyingPrice : uint128(msg.value)
         });
-        
+            payable(bookIdToSellerAddress[bookid]).transfer(msg.value);
+        _transfer(bookIdToSellerAddress[bookid], msg.sender, _bookId);
+                
         idToBuyer[_bookId] = tempBuyer;
         isSoldBook[bookid] = true;
         
